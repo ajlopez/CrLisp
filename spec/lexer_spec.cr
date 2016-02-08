@@ -1,8 +1,9 @@
 
+require "spec"
 require "../src/crlisp"
 
 module CrLisp
-    RSpec.describe Lexer, "lexer" do
+    describe Lexer do
         context "atoms" do
             it "get atom token" do
                 source = StringSource.new "atom"
