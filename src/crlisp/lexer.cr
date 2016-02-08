@@ -28,7 +28,7 @@ module CrLisp
                 return nextString
             end
             
-            if @@separators.include? char
+            if @@separators.includes? char
                 return Token.new char, TokenType::DELIMITER
             end
 
@@ -78,7 +78,7 @@ module CrLisp
             char = @source.nextChar
             
             while char
-                if !char =~ /\s/ && !@@separators.include? char
+                if !char =~ /\s/ && !@@separators.includes? char
                     value += char
                     char = @source.nextChar
                 else
@@ -96,7 +96,7 @@ module CrLisp
             char = @source.nextChar
             
             while char
-                if !char =~ /\s/ && !@@separators.include? char
+                if !char =~ /\s/ && !@@separators.includes? char
                     value += char
                     char = @source.nextChar
                 else
