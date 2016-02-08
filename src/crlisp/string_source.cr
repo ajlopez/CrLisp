@@ -5,7 +5,7 @@ module CrLisp
 		def initialize(text)
 			@text = text
 			@position = 0
-			@chars = []
+			@chars = [] of Char
 		end
 		
 		def nextChar
