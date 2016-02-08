@@ -10,7 +10,7 @@ module CrLisp
         end
         
         def nextToken
-            if @tokens.length > 0
+            if @tokens.size > 0
                 return @tokens.pop
             end
             
