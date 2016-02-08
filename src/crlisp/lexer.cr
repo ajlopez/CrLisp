@@ -16,7 +16,7 @@ module CrLisp
             
             char = @source.nextChar
             
-            while char and char =~ /\s/
+            while char && char =~ /\s/
                 char = @source.nextChar
             end
             
