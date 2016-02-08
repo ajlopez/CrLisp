@@ -10,10 +10,10 @@ module CrLisp
                 lexer = Lexer.new source
                 token = lexer.nextToken
 
-                expect(token).to_not be_nil
-                expect(token.value).to eq("atom")
-                expect(token.type).to eq(TokenType::ATOM)
-                expect(lexer.nextToken).to be_nil
+                token.should_not be_nil
+                token.value.should eq("atom")
+                token.type.should eq(TokenType::ATOM)
+                token.nextToken().should be_nil
             end
 
             it "get atom token with spaces" do
@@ -21,10 +21,10 @@ module CrLisp
                 lexer = Lexer.new source
                 token = lexer.nextToken
 
-                expect(token).to_not be_nil
-                expect(token.value).to eq("atom")
-                expect(token.type).to eq(TokenType::ATOM)
-                expect(lexer.nextToken).to be_nil
+                token.should_not be_nil
+                token.value.should eq("atom")
+                token.type.should eq(TokenType::ATOM)
+                token.nextToken().should be_nil
             end
 
             it "get two atoms" do
@@ -32,17 +32,17 @@ module CrLisp
                 lexer = Lexer.new source
                 token = lexer.nextToken
 
-                expect(token).to_not be_nil
-                expect(token.value).to eq("foo")
-                expect(token.type).to eq(TokenType::ATOM)
+                token.should_not be_nil
+                token.value.should eq("foo")
+                token.type.should eq(TokenType::ATOM)
                 
                 token = lexer.nextToken
 
-                expect(token).to_not be_nil
-                expect(token.value).to eq("bar")
-                expect(token.type).to eq(TokenType::ATOM)
+                token.should_not be_nil
+                token.value.should eq("nar")
+                token.type.should eq(TokenType::ATOM)
 
-                expect(lexer.nextToken).to be_nil
+                token.nextToken().should be_nil
             end
         end
         
@@ -53,17 +53,17 @@ module CrLisp
 
                 token = lexer.nextToken
 
-                expect(token).to_not be_nil
-                expect(token.value).to eq("(")
-                expect(token.type).to eq(TokenType::DELIMITER)
+                token.should_not be_nil
+                token.value.should eq("(")
+                token.type.should eq(TokenType::SEPARATOR)
 
                 token = lexer.nextToken
 
-                expect(token).to_not be_nil
-                expect(token.value).to eq(")")
-                expect(token.type).to eq(TokenType::DELIMITER)
+                token.should_not be_nil
+                token.value.should eq(")")
+                token.type.should eq(TokenType::SEPARATOR)
 
-                expect(lexer.nextToken).to be_nil
+                token.nextToken().should be_nil
             end
         end
     end
