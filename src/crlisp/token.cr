@@ -3,7 +3,7 @@ module CrLisp
 
     class Token
         property value
-        property type type
+        property type
         
         def initialize(@value, @type)
         end
