@@ -62,7 +62,7 @@ module CrLisp
             
             while char
                 if char != '"'
-                    value += char
+                    value = value + char
                     char = @source.nextChar
                 else
                     break
@@ -73,13 +73,13 @@ module CrLisp
         end
 
         private def nextAtom(firstch)
-            value = firstch
+            value = "" + firstch
             
             char = @source.nextChar
             
             while char
                 if !char =~ /\s/ && !@@separators.includes? char
-                    value += char
+                    value = value + char
                     char = @source.nextChar
                 else
                     @source.pushChar char
@@ -91,13 +91,13 @@ module CrLisp
         end
 
         private def nextSpecialAtom(firstch)
-            value = firstch
+            value = "" + firstch
             
             char = @source.nextChar
             
             while char
                 if !char =~ /\s/ && !@@separators.includes? char
-                    value += char
+                    value = value + char
                     char = @source.nextChar
                 else
                     @source.pushChar char
@@ -109,13 +109,13 @@ module CrLisp
         end
 
         private def nextInteger(firstch)
-            value = firstch
+            value = "" + firstch
             
             char = @source.nextChar
             
             while char
                 if char =~ /\d/
-                    value += char
+                    value = value + char
                     char = @source.nextChar
                 else
                     @source.pushChar char
