@@ -20,7 +20,7 @@ module CrLisp
                 char = @source.nextChar
             end
             
-            if char == nil
+            if char.nil?
                 return nil
             end
             
@@ -28,27 +28,39 @@ module CrLisp
                 return nextString
             end
             
-            if @@separators.includes? char
-                return Token.new char, TokenType::DELIMITER
+            if char 
+		if @@separators.includes? char
+                    return Token.new char, TokenType::DELIMITER
+		end
             end
 
-            if char =~ /\d/
-                return nextInteger char
+            if char
+		if  char =~ /\d/
+                	return nextInteger char
+		end
             end
             
-            if char == '.' || char == '@'
-                return nextSpecialAtom char
-            end
-            
-            if char =~ /\w/
-                return nextAtom char
-            end
+            if char
+		if char == '.' || char == '@'
+                	return nextSpecialAtom char
+            	end
+	    end            
+
+            if char
+		if char =~ /\w/
+                    return nextAtom char
+                end
+	    end
             
             if char == '\'' || char == '`' || char == ','
                 return Token.new char, TokenType::ATOM
             end
             
-            return nextSpecialAtom char
+            if char
+	            return nextSpecialAtom char
+	    end
+
+            return nil
         end
         
         def pushToken(token)

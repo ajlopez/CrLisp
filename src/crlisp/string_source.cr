@@ -9,10 +9,12 @@ module CrLisp
 		end
 		
 		def nextChar
-			char = @chars.pop
+			if @chars.size > 0
+				return @chars.pop
+			end
 			
-			if char
-				return char
+			if @text.size <= @position
+				return nil
 			end
 		
 			char = @text[@position]
