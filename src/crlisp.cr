@@ -1,4 +1,4 @@
 
-require 'crlisp/token.rb'
-require 'crlisp/lexer.rb'
+require "./crlisp/token.cr"
+require "./crlisp/lexer.cr"
 

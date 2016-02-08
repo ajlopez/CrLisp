@@ -1,5 +1,5 @@
 
-require 'crlisp'
+require "../src/crlisp"
 
 module CrLisp
     RSpec.describe Lexer, "lexer" do
