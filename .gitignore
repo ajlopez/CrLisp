@@ -1,0 +1,9 @@
+# from https://github.com/sdogruyol/kemal/blob/master/.gitignore
+/libs/
+/.crystal/
+/.shards/
+*.log
+
+# Libraries don't need dependency lock
+# Dependencies will be locked in application that uses them
+/shard.lock
