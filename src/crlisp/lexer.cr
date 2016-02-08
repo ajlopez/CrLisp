@@ -78,7 +78,7 @@ module CrLisp
             char = @source.nextChar
             
             while char
-                if not char =~ /\s/ && not @@separators.include? char
+                if !char =~ /\s/ && !@@separators.include? char
                     value += char
                     char = @source.nextChar
                 else
@@ -96,7 +96,7 @@ module CrLisp
             char = @source.nextChar
             
             while char
-                if not char =~ /\s/ && not @@separators.include? char
+                if !char =~ /\s/ && !@@separators.include? char
                     value += char
                     char = @source.nextChar
                 else
