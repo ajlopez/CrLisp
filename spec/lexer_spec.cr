@@ -11,9 +11,11 @@ module CrLisp
                 token = lexer.nextToken
 
                 token.should_not be_nil
-                token.value.should eq("atom")
-                token.type.should eq(TokenType::ATOM)
-                token.nextToken().should be_nil
+		if token
+	                token.value.should eq("atom")
+        	        token.type.should eq(TokenType::ATOM)
+		end
+                lexer.nextToken().should be_nil
             end
 
             it "get atom token with spaces" do
@@ -22,9 +24,12 @@ module CrLisp
                 token = lexer.nextToken
 
                 token.should_not be_nil
-                token.value.should eq("atom")
-                token.type.should eq(TokenType::ATOM)
-                token.nextToken().should be_nil
+
+		if token
+	                token.value.should eq("atom")
+        	        token.type.should eq(TokenType::ATOM)
+		end
+                lexer.nextToken().should be_nil
             end
 
             it "get two atoms" do
@@ -33,16 +38,20 @@ module CrLisp
                 token = lexer.nextToken
 
                 token.should_not be_nil
-                token.value.should eq("foo")
-                token.type.should eq(TokenType::ATOM)
+		if token
+	                token.value.should eq("foo")
+        	        token.type.should eq(TokenType::ATOM)
+		end
                 
                 token = lexer.nextToken
 
                 token.should_not be_nil
-                token.value.should eq("nar")
-                token.type.should eq(TokenType::ATOM)
+		if token
+                	token.value.should eq("nar")
+                	token.type.should eq(TokenType::ATOM)
+		end
 
-                token.nextToken().should be_nil
+                lexer.nextToken().should be_nil
             end
         end
         
@@ -54,16 +63,20 @@ module CrLisp
                 token = lexer.nextToken
 
                 token.should_not be_nil
-                token.value.should eq("(")
-                token.type.should eq(TokenType::SEPARATOR)
+		if token
+	                token.value.should eq("(")
+        	        token.type.should eq(TokenType::DELIMITER)
+		end
 
                 token = lexer.nextToken
 
                 token.should_not be_nil
-                token.value.should eq(")")
-                token.type.should eq(TokenType::SEPARATOR)
+		if token
+	                token.value.should eq(")")
+        	        token.type.should eq(TokenType::DELIMITER)
+		end
 
-                token.nextToken().should be_nil
+		lexer.nextToken().should be_nil
             end
         end
     end

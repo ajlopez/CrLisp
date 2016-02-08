@@ -2,8 +2,8 @@
 module CrLisp
 
     class Token
-        property value
-        property type
+        property value : String
+        property type : TokenType
         
         def initialize(@value, @type)
         end
