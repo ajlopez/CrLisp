@@ -6,7 +6,7 @@ module CrLisp
 
         def initialize(source)
             @source = source
-            @tokens = []
+            @tokens = [] of Token
         end
         
         def nextToken
@@ -24,7 +24,7 @@ module CrLisp
                 return nil
             end
             
-            if char == ?"
+            if char == '"'
                 return nextString
             end
             
@@ -36,7 +36,7 @@ module CrLisp
                 return nextInteger char
             end
             
-            if char == ?. or char == ?@
+            if char == '.' || char == '@'
                 return nextSpecialAtom char
             end
             
@@ -44,7 +44,7 @@ module CrLisp
                 return nextAtom char
             end
             
-            if char == ?' or char == ?` or char == ?,
+            if char == '\'' || char == '`' || char == ','
                 return Token.new char, TokenType::ATOM
             end
             
@@ -55,15 +55,13 @@ module CrLisp
             @tokens.push(token)
         end
         
-        private
-        
-        def nextString
+        private def nextString
             value = ""
             
             char = @source.nextChar
             
             while char
-                if char != ?"
+                if char != '"'
                     value += char
                     char = @source.nextChar
                 else
@@ -74,13 +72,13 @@ module CrLisp
             return Token.new value, TokenType::STRING
         end
 
-        def nextAtom(firstch)
+        private def nextAtom(firstch)
             value = firstch
             
             char = @source.nextChar
             
             while char
-                if not char =~ /\s/ and not @@separators.include? char
+                if not char =~ /\s/ && not @@separators.include? char
                     value += char
                     char = @source.nextChar
                 else
@@ -92,13 +90,13 @@ module CrLisp
             return Token.new value, TokenType::ATOM
         end
 
-        def nextSpecialAtom(firstch)
+        private def nextSpecialAtom(firstch)
             value = firstch
             
             char = @source.nextChar
             
             while char
-                if not char =~ /\s/ and not @@separators.include? char
+                if not char =~ /\s/ && not @@separators.include? char
                     value += char
                     char = @source.nextChar
                 else
@@ -110,7 +108,7 @@ module CrLisp
             return Token.new value, TokenType::ATOM
         end
 
-        def nextInteger(firstch)
+        private def nextInteger(firstch)
             value = firstch
             
             char = @source.nextChar
