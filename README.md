@@ -1,6 +1,7 @@
 # CrLisp
 
-Lisp interpreter written in Crystal programming language, WIP
+Lisp interpreter written in
+Crystal programming language, WIP
 
 ## References
 
