@@ -11,6 +11,7 @@ module CrLisp
             if list
                 list.first.should be_nil
                 list.rest.should be_nil
+                list.to_s.should eq("(nil)")
             end
         end
     end
