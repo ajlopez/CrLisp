@@ -114,7 +114,7 @@ module CrLisp
             char = @source.nextChar
             
             while char
-                if char =~ /\d/
+                if char.digit?
                     value = value + char
                     char = @source.nextChar
                 else
