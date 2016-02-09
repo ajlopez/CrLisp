@@ -14,10 +14,10 @@ module CrLisp
                 return @tokens.pop
             end
             
-            char = @source.nextChar
+            char = @source.next_char
             
             while char && char.whitespace?
-                char = @source.nextChar
+                char = @source.next_char
             end
             
             if char
@@ -58,12 +58,12 @@ module CrLisp
         private def nextString
             value = ""
             
-            char = @source.nextChar
+            char = @source.next_char
             
             while char
                 if char != '"'
                     value = value + char
-                    char = @source.nextChar
+                    char = @source.next_char
                 else
                     break
                 end
@@ -75,14 +75,14 @@ module CrLisp
         private def nextAtom(firstch)
             value = "" + firstch
             
-            char = @source.nextChar
+            char = @source.next_char
 
             while char
                 if !char.whitespace? && !(@@separators.includes? char)
                     value = value + char
-                    char = @source.nextChar
+                    char = @source.next_char
                 else
-                    @source.pushChar char
+                    @source.push_char char
                     break
                 end
             end
@@ -93,14 +93,14 @@ module CrLisp
         private def nextSpecialAtom(firstch)
             value = "" + firstch
             
-            char = @source.nextChar
+            char = @source.next_char
             
             while char
                 if !char =~ /\s/ && !@@separators.includes? char
                     value = value + char
-                    char = @source.nextChar
+                    char = @source.next_char
                 else
-                    @source.pushChar char
+                    @source.push_char char
                     break
                 end
             end
@@ -111,12 +111,12 @@ module CrLisp
         private def nextInteger(firstch)
             value = "" + firstch
             
-            char = @source.nextChar
+            char = @source.next_char
             
             while char
                 if char.digit?
                     value = value + char
-                    char = @source.nextChar
+                    char = @source.next_char
                 else
                     break
                 end
@@ -127,7 +127,7 @@ module CrLisp
                     return nextReal value
                 end
                 
-                @source.pushChar char
+                @source.push_char char
             end
             
             return Token.new value, TokenType::INTEGER
@@ -136,14 +136,14 @@ module CrLisp
         private def nextReal(integral)
             value = integral + '.';
             
-            char = @source.nextChar
+            char = @source.next_char
             
             while char
                 if char.digit?
                     value = value + char
-                    char = @source.nextChar
+                    char = @source.next_char
                 else
-                    @source.pushChar char
+                    @source.push_char char
                     break
                 end
             end

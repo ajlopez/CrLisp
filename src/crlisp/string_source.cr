@@ -8,7 +8,7 @@ module CrLisp
 			@chars = [] of Char
 		end
 		
-		def nextChar
+		def next_char
 			if @chars.size > 0
 				return @chars.pop
 			end
@@ -22,7 +22,7 @@ module CrLisp
 			return char
 		end
 		
-		def pushChar(ch)
+		def push_char(ch)
 			@chars.push ch
 		end
 	end

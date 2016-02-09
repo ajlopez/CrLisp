@@ -6,7 +6,7 @@ module CrLisp
         context "Chars" do
             it "get char" do
                 source = StringSource.new "a"
-                char = source.nextChar
+                char = source.next_char
                 
                 char.should_not be_nil
                 char.should eq('a')
@@ -15,17 +15,31 @@ module CrLisp
             it "get two chars" do
                 source = StringSource.new "ab"
                 
-                char = source.nextChar
+                char = source.next_char
                 
                 char.should_not be_nil
                 char.should eq('a')
                 
-                char = source.nextChar
+                char = source.next_char
                 
                 char.should_not be_nil
                 char.should eq('b')
                 
-                char = source.nextChar
+                char = source.next_char
+                char.should be_nil
+            end
+            
+            it "push and get char" do
+                source = StringSource.new ""
+                
+                source.push_char 'a'
+                
+                char = source.next_char
+                
+                char.should_not be_nil
+                char.should eq('a')
+                
+                char = source.next_char
                 char.should be_nil
             end
         end
