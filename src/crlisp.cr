@@ -4,3 +4,8 @@ require "./crlisp/lexer.cr"
 require "./crlisp/string_source.cr"
 
 require "./crlisp/list.cr"
+
+def evaluate(obj)
+    obj
+end
+
