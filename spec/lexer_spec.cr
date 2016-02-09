@@ -43,6 +43,47 @@ module CrLisp
             end
         end
         
+        context "reals" do
+            it "get real token" do
+                source = StringSource.new "12.34"
+                lexer = Lexer.new source
+                token = lexer.nextToken
+
+                token.should_not be_nil
+        		
+                if token
+        	        token.type.should eq(TokenType::REAL)
+	                token.value.should eq("12.34")
+		        end
+
+                lexer.nextToken().should be_nil
+            end
+
+            it "get two real tokens" do
+                source = StringSource.new "12.34 56.78"
+                lexer = Lexer.new source
+                
+                token = lexer.nextToken
+
+                token.should_not be_nil
+        		
+                if token
+        	        token.type.should eq(TokenType::REAL)
+	                token.value.should eq("12.34")
+		        end
+                
+                token = lexer.nextToken
+
+                token.should_not be_nil
+        		if token
+        	        token.type.should eq(TokenType::REAL)
+	                token.value.should eq("56.78")
+		        end
+
+                lexer.nextToken().should be_nil
+            end
+        end
+        
         context "atoms" do
             it "get atom token" do
                 source = StringSource.new "atom"

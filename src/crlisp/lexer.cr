@@ -118,12 +118,37 @@ module CrLisp
                     value = value + char
                     char = @source.nextChar
                 else
+                    break
+                end
+            end
+            
+            if char
+                if char == '.'
+                    return nextReal value
+                end
+                
+                @source.pushChar char
+            end
+            
+            return Token.new value, TokenType::INTEGER
+        end
+
+        private def nextReal(integral)
+            value = integral + '.';
+            
+            char = @source.nextChar
+            
+            while char
+                if char.digit?
+                    value = value + char
+                    char = @source.nextChar
+                else
                     @source.pushChar char
                     break
                 end
             end
             
-            return Token.new value, TokenType::INTEGER
+            return Token.new value, TokenType::REAL
         end
     end
 
