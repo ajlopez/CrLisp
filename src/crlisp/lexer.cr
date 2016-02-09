@@ -22,7 +22,7 @@ module CrLisp
             
             if char
                 if char == '"'
-                    return nextString
+                    return next_string
                 end
                 
                 if @@separators.includes? char
@@ -30,22 +30,22 @@ module CrLisp
                 end
  
                 if  char.digit?
-                    return nextInteger char
+                    return next_integer char
                 end
                     
                 if char == '.' || char == '@'
-                    return nextSpecialAtom char
+                    return next_special_atom char
                 end            
 
                 if char.alpha?
-                    return nextAtom char
+                    return next_atom char
                 end
                     
                 if char == '\'' || char == '`' || char == ','
                     return Token.new char.to_s, TokenType::ATOM
                 end
 
-                return nextSpecialAtom char
+                return next_special_atom char
             end
 
             return nil                
@@ -55,7 +55,7 @@ module CrLisp
             @tokens.push(token)
         end
         
-        private def nextString
+        private def next_string
             value = ""
             
             char = @source.next_char
@@ -72,7 +72,7 @@ module CrLisp
             return Token.new value, TokenType::STRING
         end
 
-        private def nextAtom(firstch)
+        private def next_atom(firstch)
             value = "" + firstch
             
             char = @source.next_char
@@ -90,7 +90,7 @@ module CrLisp
             return Token.new value, TokenType::ATOM
         end
 
-        private def nextSpecialAtom(firstch)
+        private def next_special_atom(firstch)
             value = "" + firstch
             
             char = @source.next_char
@@ -108,7 +108,7 @@ module CrLisp
             return Token.new value, TokenType::ATOM
         end
 
-        private def nextInteger(firstch)
+        private def next_integer(firstch)
             value = "" + firstch
             
             char = @source.next_char
@@ -124,7 +124,7 @@ module CrLisp
             
             if char
                 if char == '.'
-                    return nextReal value
+                    return next_real value
                 end
                 
                 @source.push_char char
@@ -133,7 +133,7 @@ module CrLisp
             return Token.new value, TokenType::INTEGER
         end
 
-        private def nextReal(integral)
+        private def next_real(integral)
             value = integral + '.';
             
             char = @source.next_char
