@@ -11,10 +11,11 @@ module CrLisp
                 token = lexer.nextToken
 
                 token.should_not be_nil
-		if token
-	                token.value.should eq("atom")
+        		if token
         	        token.type.should eq(TokenType::ATOM)
-		end
+	                token.value.should eq("atom")
+		        end
+
                 lexer.nextToken().should be_nil
             end
 
@@ -25,10 +26,11 @@ module CrLisp
 
                 token.should_not be_nil
 
-		if token
-	                token.value.should eq("atom")
+        		if token
         	        token.type.should eq(TokenType::ATOM)
-		end
+	                token.value.should eq("atom")
+		        end
+                
                 lexer.nextToken().should be_nil
             end
 
@@ -38,18 +40,20 @@ module CrLisp
                 token = lexer.nextToken
 
                 token.should_not be_nil
-		if token
+		        
+                if token
 	                token.value.should eq("foo")
         	        token.type.should eq(TokenType::ATOM)
-		end
+		        end
                 
                 token = lexer.nextToken
 
                 token.should_not be_nil
-		if token
-                	token.value.should eq("nar")
+		        
+                if token
+                	token.value.should eq("bar")
                 	token.type.should eq(TokenType::ATOM)
-		end
+		        end
 
                 lexer.nextToken().should be_nil
             end
@@ -63,20 +67,22 @@ module CrLisp
                 token = lexer.nextToken
 
                 token.should_not be_nil
-		if token
+		        
+                if token
 	                token.value.should eq("(")
         	        token.type.should eq(TokenType::DELIMITER)
-		end
+		        end
 
                 token = lexer.nextToken
 
                 token.should_not be_nil
-		if token
+		
+                if token
 	                token.value.should eq(")")
         	        token.type.should eq(TokenType::DELIMITER)
-		end
+		        end
 
-		lexer.nextToken().should be_nil
+		        lexer.nextToken().should be_nil
             end
         end
     end

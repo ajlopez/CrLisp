@@ -16,51 +16,39 @@ module CrLisp
             
             char = @source.nextChar
             
-            while char && char =~ /\s/
+            while char && char.whitespace?
                 char = @source.nextChar
             end
             
-            if char.nil?
-                return nil
-            end
-            
-            if char == '"'
-                return nextString
-            end
-            
-            if char 
-		if @@separators.includes? char
-                    return Token.new char, TokenType::DELIMITER
-		end
-            end
+            if char
+                if char == '"'
+                    return nextString
+                end
+                
+                if @@separators.includes? char
+                    return Token.new char.to_s, TokenType::DELIMITER
+                end
+ 
+                if  char.digit?
+                    return nextInteger char
+                end
+                    
+                if char == '.' || char == '@'
+                    return nextSpecialAtom char
+                end            
 
-            if char
-		if  char =~ /\d/
-                	return nextInteger char
-		end
-            end
-            
-            if char
-		if char == '.' || char == '@'
-                	return nextSpecialAtom char
-            	end
-	    end            
-
-            if char
-		if char =~ /\w/
+                if char.alpha?
                     return nextAtom char
                 end
-	    end
-            
-            if char == '\'' || char == '`' || char == ','
-                return Token.new char, TokenType::ATOM
-            end
-            
-            if char
-	            return nextSpecialAtom char
-	    end
+                    
+                if char == '\'' || char == '`' || char == ','
+                    return Token.new char.to_s, TokenType::ATOM
+                end
 
-            return nil
+                return nextSpecialAtom char
+            end
+
+            return nil                
         end
         
         def pushToken(token)
@@ -88,9 +76,9 @@ module CrLisp
             value = "" + firstch
             
             char = @source.nextChar
-            
+
             while char
-                if !char =~ /\s/ && !@@separators.includes? char
+                if !char.whitespace? && !(@@separators.includes? char)
                     value = value + char
                     char = @source.nextChar
                 else
