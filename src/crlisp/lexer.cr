@@ -9,7 +9,7 @@ module CrLisp
             @tokens = [] of Token
         end
         
-        def nextToken
+        def next_token
             if @tokens.size > 0
                 return @tokens.pop
             end

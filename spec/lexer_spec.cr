@@ -8,7 +8,7 @@ module CrLisp
             it "get integer token" do
                 source = StringSource.new "42"
                 lexer = Lexer.new source
-                token = lexer.nextToken
+                token = lexer.next_token
 
                 token.should_not be_nil
         		if token
@@ -16,14 +16,14 @@ module CrLisp
 	                token.value.should eq("42")
 		        end
 
-                lexer.nextToken().should be_nil
+                lexer.next_token().should be_nil
             end
 
             it "get two integer tokens" do
                 source = StringSource.new "12 34"
                 lexer = Lexer.new source
                 
-                token = lexer.nextToken
+                token = lexer.next_token
 
                 token.should_not be_nil
         		if token
@@ -31,7 +31,7 @@ module CrLisp
 	                token.value.should eq("12")
 		        end
                 
-                token = lexer.nextToken
+                token = lexer.next_token
 
                 token.should_not be_nil
         		if token
@@ -39,7 +39,7 @@ module CrLisp
 	                token.value.should eq("34")
 		        end
 
-                lexer.nextToken().should be_nil
+                lexer.next_token().should be_nil
             end
         end
         
@@ -47,7 +47,7 @@ module CrLisp
             it "get real token" do
                 source = StringSource.new "12.34"
                 lexer = Lexer.new source
-                token = lexer.nextToken
+                token = lexer.next_token
 
                 token.should_not be_nil
         		
@@ -56,14 +56,14 @@ module CrLisp
 	                token.value.should eq("12.34")
 		        end
 
-                lexer.nextToken().should be_nil
+                lexer.next_token().should be_nil
             end
 
             it "get two real tokens" do
                 source = StringSource.new "12.34 56.78"
                 lexer = Lexer.new source
                 
-                token = lexer.nextToken
+                token = lexer.next_token
 
                 token.should_not be_nil
         		
@@ -72,7 +72,7 @@ module CrLisp
 	                token.value.should eq("12.34")
 		        end
                 
-                token = lexer.nextToken
+                token = lexer.next_token
 
                 token.should_not be_nil
         		if token
@@ -80,7 +80,7 @@ module CrLisp
 	                token.value.should eq("56.78")
 		        end
 
-                lexer.nextToken().should be_nil
+                lexer.next_token().should be_nil
             end
         end
         
@@ -88,7 +88,7 @@ module CrLisp
             it "get atom token" do
                 source = StringSource.new "atom"
                 lexer = Lexer.new source
-                token = lexer.nextToken
+                token = lexer.next_token
 
                 token.should_not be_nil
         		if token
@@ -96,13 +96,13 @@ module CrLisp
 	                token.value.should eq("atom")
 		        end
 
-                lexer.nextToken().should be_nil
+                lexer.next_token().should be_nil
             end
 
             it "get atom token with spaces" do
                 source = StringSource.new "  atom   "
                 lexer = Lexer.new source
-                token = lexer.nextToken
+                token = lexer.next_token
 
                 token.should_not be_nil
 
@@ -111,13 +111,13 @@ module CrLisp
 	                token.value.should eq("atom")
 		        end
                 
-                lexer.nextToken().should be_nil
+                lexer.next_token().should be_nil
             end
 
             it "get two atoms" do
                 source = StringSource.new "foo bar"
                 lexer = Lexer.new source
-                token = lexer.nextToken
+                token = lexer.next_token
 
                 token.should_not be_nil
 		        
@@ -126,7 +126,7 @@ module CrLisp
         	        token.type.should eq(TokenType::ATOM)
 		        end
                 
-                token = lexer.nextToken
+                token = lexer.next_token
 
                 token.should_not be_nil
 		        
@@ -135,7 +135,7 @@ module CrLisp
                 	token.type.should eq(TokenType::ATOM)
 		        end
 
-                lexer.nextToken().should be_nil
+                lexer.next_token().should be_nil
             end
         end
         
@@ -144,7 +144,7 @@ module CrLisp
                 source = StringSource.new "()"
                 lexer = Lexer.new source
 
-                token = lexer.nextToken
+                token = lexer.next_token
 
                 token.should_not be_nil
 		        
@@ -153,7 +153,7 @@ module CrLisp
         	        token.type.should eq(TokenType::DELIMITER)
 		        end
 
-                token = lexer.nextToken
+                token = lexer.next_token
 
                 token.should_not be_nil
 		
@@ -162,7 +162,7 @@ module CrLisp
         	        token.type.should eq(TokenType::DELIMITER)
 		        end
 
-		        lexer.nextToken().should be_nil
+		        lexer.next_token.should be_nil
             end
         end
     end
